@@ -2,8 +2,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:project_assignment_1/user_model.dart';
-import 'package:project_assignment_1/user_repository_interface.dart';
+import 'package:project_assignment_1/data/models/user_model.dart';
+import 'package:project_assignment_1/data/repositories/user_repository_interface.dart';
 
 
 // Events

@@ -1,7 +1,7 @@
 // lib/data/datasources/local_storage_service.dart
 
 import 'dart:convert';
-import 'package:project_assignment_1/user_model.dart';
+import 'package:project_assignment_1/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

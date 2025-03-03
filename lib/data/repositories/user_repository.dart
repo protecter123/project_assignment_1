@@ -1,9 +1,9 @@
 // lib/data/repositories/user_repository_impl.dart
 
-import 'package:project_assignment_1/api_service.dart';
-import 'package:project_assignment_1/local_Storage.dart';
-import 'package:project_assignment_1/user_model.dart';
-import 'package:project_assignment_1/user_repository_interface.dart';
+import 'package:project_assignment_1/data/datasources/api_service.dart';
+import 'package:project_assignment_1/data/datasources/local_Storage.dart';
+import 'package:project_assignment_1/data/models/user_model.dart';
+import 'package:project_assignment_1/data/repositories/user_repository_interface.dart';
 
 
 class UserRepositoryImpl implements UserRepository {

@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_assignment_1/api_service.dart';
-import 'package:project_assignment_1/home_screen.dart';
-import 'package:project_assignment_1/local_Storage.dart';
-import 'package:project_assignment_1/user_bloc.dart';
-import 'package:project_assignment_1/user_repository.dart';
+import 'package:project_assignment_1/data/datasources/api_service.dart';
+import 'package:project_assignment_1/presentation/screens/home_screen.dart';
+import 'package:project_assignment_1/data/datasources/local_Storage.dart';
+import 'package:project_assignment_1/presentation/bloc/user/user_bloc.dart';
+import 'package:project_assignment_1/data/repositories/user_repository.dart';
 
 void main() {
   runApp(MyApp());

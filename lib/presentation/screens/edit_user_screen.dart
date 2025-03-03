@@ -1,31 +1,41 @@
-// lib/presentation/screens/add_user_screen.dart
+// lib/presentation/screens/edit_user_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_assignment_1/user_bloc.dart';
-import 'package:project_assignment_1/user_model.dart';
+import 'package:project_assignment_1/presentation/bloc/user/user_bloc.dart';
+import 'package:project_assignment_1/data/models/user_model.dart';
 
+class EditUserScreen extends StatefulWidget {
+  final UserModel user;
 
-class AddUserScreen extends StatefulWidget {
-  const AddUserScreen({Key? key}) : super(key: key);
+  const EditUserScreen({Key? key, required this.user}) : super(key: key);
 
   @override
-  _AddUserScreenState createState() => _AddUserScreenState();
+  _EditUserScreenState createState() => _EditUserScreenState();
 }
 
-class _AddUserScreenState extends State<AddUserScreen> {
+class _EditUserScreenState extends State<EditUserScreen> {
   final _formKey = GlobalKey<FormState>();
   
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _streetController = TextEditingController();
-  final _suiteController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _zipcodeController = TextEditingController();
-  final _websiteController = TextEditingController();
+  late TextEditingController _nameController;
+  late TextEditingController _emailController;
+  late TextEditingController _phoneController;
+  late TextEditingController _streetController;
+  late TextEditingController _suiteController;
+  late TextEditingController _cityController;
+  late TextEditingController _zipcodeController;
+  late TextEditingController _websiteController;
   
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.user.name);
+    _emailController = TextEditingController(text: widget.user.email);
+    _phoneController = TextEditingController(text: widget.user.phone);
+   
+  }
 
   @override
   void dispose() {
@@ -46,15 +56,19 @@ class _AddUserScreenState extends State<AddUserScreen> {
         _isLoading = true;
       });
       
-      final newUser = UserModel(
-        id: -1, // This will be replaced by the repository
+      final updatedUser = widget.user.copyWith(
         name: _nameController.text,
         email: _emailController.text,
         phone: _phoneController.text,
        
       );
       
-      context.read<UserBloc>().add(AddNewUser(user: newUser));
+      context.read<UserBloc>().add(
+        UpdateExistingUser(
+          userId: widget.user.id,
+          user: updatedUser,
+        ),
+      );
     }
   }
 
@@ -62,16 +76,16 @@ class _AddUserScreenState extends State<AddUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New User'),
+        title: Text('Edit User'),
       ),
       body: BlocListener<UserBloc, UserState>(
         listener: (context, state) {
-          if (state is UserAdded) {
+          if (state is UserUpdated) {
             setState(() {
               _isLoading = false;
             });
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('User added successfully')),
+              SnackBar(content: Text('User updated successfully')),
             );
             Navigator.pop(context, true);
           } else if (state is UserError) {
@@ -131,6 +145,9 @@ class _AddUserScreenState extends State<AddUserScreen> {
                   },
                 ),
                
+                
+               
+                
                 SizedBox(height: 24),
                 
                 ElevatedButton(
@@ -139,8 +156,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     padding: EdgeInsets.symmetric(vertical: 12),
                     child: _isLoading
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text(
-                            'Add User',
+                        :const Text(
+                            'Save Changes',
                             style: TextStyle(fontSize: 16),
                           ),
                   ),

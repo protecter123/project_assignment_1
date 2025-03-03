@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_assignment_1/home_screen.dart';
-import 'package:project_assignment_1/shimmer_loading.dart';
-import 'package:project_assignment_1/user_bloc.dart';
+import 'package:project_assignment_1/presentation/screens/home_screen.dart';
+import 'package:project_assignment_1/presentation/widgets/shimmer_loading.dart';
+import 'package:project_assignment_1/presentation/bloc/user/user_bloc.dart';
 
 import 'edit_user_screen.dart';
 
